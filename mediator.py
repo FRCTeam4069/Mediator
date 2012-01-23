@@ -42,7 +42,6 @@ def operations(location):
 
   if flask.request.method == "POST":
     data = flask.request.data
-    print data
     queue.append(data)
     return success()
   elif flask.request.method == "GET":
@@ -66,11 +65,15 @@ def kv(key):
     except KeyError:
       return notfound()
   elif flask.request.method == "DELETE":
-    try:
-      del kv_store[key]
-      return success()
-    except KeyError:
-      return notfound()
+    return delkv(key)
+
+@app.route("/delkv/<key>")
+def delkv(key): # J2ME doesn't support DELETE.
+  try:
+    del kv_store[key]
+    return success()
+  except KeyError:
+    return notfound()
 
 @app.route("/credits")
 def credits():
