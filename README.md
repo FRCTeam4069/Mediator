@@ -25,7 +25,7 @@ kv storage (maybe you could create your own later).
 
     GET /q/commands -> This gets the next command from the queue
     POST /q/commands -> enqueues a new command
-      Takes data=<yourdatahere> (for the POST data)
+      Takes raw data, not form data (for the POST data)
 
 Same thing for /q/data
 

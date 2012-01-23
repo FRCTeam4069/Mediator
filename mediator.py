@@ -41,7 +41,8 @@ def operations(location):
     return response
 
   if flask.request.method == "POST":
-    data = flask.request.form["data"]
+    data = flask.request.data
+    print data
     queue.append(data)
     return success()
   elif flask.request.method == "GET":
@@ -56,7 +57,7 @@ def operations(location):
 def kv(key):
   global kv_store
   if flask.request.method == "POST":
-    data = flask.request.form["data"]
+    data = flask.request.data
     kv_store[key] = data
     return success()
   elif flask.request.method == "GET":
@@ -77,8 +78,8 @@ def credits():
 
 if __name__ == "__main__":
   if DEBUG == True:
-    app.run(debug=True, host="", port=5001)
+    app.run(debug=True, host="", port=4069)
   else:
     from gevent.wsgi import WSGIServer
-    http_server = WSGIServer(("127.0.0.1", DEPLOY_PORT), app)
+    http_server = WSGIServer(("", DEPLOY_PORT), app)
     http_server.serve_forever()
