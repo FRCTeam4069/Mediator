@@ -1,7 +1,7 @@
 /* Foundation v2.1.5 http://foundation.zurb.com */
 
 // Change to add keys to monitor.
-KVs = [];
+KVs = ["gc"];
 
 
 displayJSON = function(id, s){
@@ -25,7 +25,12 @@ Client = function(prefix){
 
 
 Client.prototype.addKVMonitor = function(form){
-  var keyname = form.keyname.value;
+  var keyname;
+  if (typeof form == "string")
+    keyname = form;
+  else
+    keyname = form.keyname.value;
+
   console.log(keyname);
   var panel = $("<div></div>");
   panel.addClass("panel");
@@ -162,6 +167,7 @@ $(document).ready(function () {
       var key = KVs[i];
       client.addKVMonitor(key);
     }
+
     loop(client);
     return false;
   };
