@@ -43,11 +43,20 @@
 		</div>
 
     <div class="row">
-      <div class="twelve columns">
+      <div class="six columns">
+        <div class="panel">
+        <h4>Connect to a server</h4>
+        <form id="connect" name="connect" action="" class="nice">
+           <input type="text" name="server" placeholder="Server name" class="input-text" value="http://localhost:4069" />
+           <button type="submit" class="nice blue radius small button">Connect</button>
+        </form>
+        </div>
+      </div>
+      <div class="six columns">
         <div class="panel">
         <h4>Add KV to Monitor</h4>
         <form id="kvadd" name="kvadd" action="" class="nice">
-          <input type="text" name="keyname" placeholder="Key name" class="input-text large inline" />
+          <input type="text" name="keyname" placeholder="Key name" class="input-text" disabled="disabled" />
           <button type="submit" class="nice blue radius small button">Add</button>
         </form>
         </div>

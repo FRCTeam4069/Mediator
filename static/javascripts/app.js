@@ -38,13 +38,13 @@ Client.prototype.addKVMonitor = function(form){
 }
 
 Client.prototype.getKey = function(key, callback){
-  $.ajax(this.prefix + "kv/" + key, {
+  $.ajax(this.prefix + "/kv/" + key, {
     processData : false
   }).done(callback).error(function() {});
 };
 
 Client.prototype.getData = function(callback){
-  $.ajax(this.prefix + "q/data", {
+  $.ajax(this.prefix + "/q/data", {
     processData : false
   }).done(callback).error(function() {});
 };
@@ -148,11 +148,16 @@ $(document).ready(function () {
     })
   }
 
-  var client = new Client();
-
-  var kvform = document.getElementById("kvadd");
-  kvform.onsubmit = function() { client.addKVMonitor(kvform); return false; };
-  loop(client);
+  var connect = document.getElementById("connect");
+  connect.onsubmit = function() {
+    var client = new Client(this.server.value);
+    this.server.disabled = true;
+    var kvform = document.getElementById("kvadd");
+    kvform.keyname.disabled = false;
+    kvform.onsubmit = function() { client.addKVMonitor(kvform); return false; };
+    loop(client);
+    return false;
+  };
 
 	/* DISABLED BUTTONS ------------- */
 	/* Gives elements with a class of 'disabled' a return: false; */
