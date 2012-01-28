@@ -33,7 +33,7 @@ def success():
   return flask.jsonify(success=1)
 
 @app.route("/q/<location>", methods=["POST", "GET"])
-def operations(location):
+def queues(location):
   queue = location_map.get(location, None)
   if queue is None:
     response = flask.jsonify(error="invalid url")
@@ -74,6 +74,10 @@ def delkv(key): # J2ME doesn't support DELETE.
     return success()
   except KeyError:
     return notfound()
+
+@app.route("/client")
+def client():
+  return flask.render_template("client.html")
 
 @app.route("/credits")
 def credits():

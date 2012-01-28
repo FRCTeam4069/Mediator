@@ -24,9 +24,15 @@ class MClient(object):
       raise e
     return r.read()
 
-  def putCommand(self, **kwargs):
+  def putToQueue(self, queue, **kwargs):
     s = json.dumps(kwargs)
-    self.send("q/commands", s)
+    self.send("q/%s" % queue, s)
+
+  def putCommand(self, **kwargs):
+    self.putToQueue("commands", **kwargs)
+
+  def putData(self, **kwargs):
+    self.putToQueue("data", **kwargs)
 
   def getData(self):
     return json.loads(self.send("q/data"))
