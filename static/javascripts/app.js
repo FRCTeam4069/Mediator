@@ -1,5 +1,8 @@
 /* Foundation v2.1.5 http://foundation.zurb.com */
 
+// Change to add keys to monitor.
+KVs = [];
+
 
 displayJSON = function(id, s){
   var jsonobj = JSON.parse(s);
@@ -155,12 +158,14 @@ $(document).ready(function () {
     var kvform = document.getElementById("kvadd");
     kvform.keyname.disabled = false;
     kvform.onsubmit = function() { client.addKVMonitor(kvform); return false; };
+    for (var i in KVs){
+      var key = KVs[i];
+      client.addKVMonitor(key);
+    }
     loop(client);
     return false;
   };
 
-	/* DISABLED BUTTONS ------------- */
-	/* Gives elements with a class of 'disabled' a return: false; */
 
 
 });
